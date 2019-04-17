@@ -1,0 +1,47 @@
+#app {
+  display: flex;
+  justify-content: center;
+}
+
+#app button {
+  margin-left: 5vw;
+  margin-top: 2vw;
+  border-radius: 5px;
+  border: solid 1px #fc0;
+  background-color: transparent;
+  width: 8vw;
+  height: 5vw;
+  cursor: pointer;
+  outline: none;
+  font-size: 1.1vw;
+}
+
+#app button:hover {
+  background-color: #fc0;
+  color: white;
+}
+
+#app #last {
+  border: solid 1px lightcoral;
+}
+
+#app #last:hover {
+  background-color: lightcoral;
+  color: white;
+}
+
+#results {
+  display: flex;
+  justify-content: center;
+  margin-top: 5vw;
+  font-size: 5vw;
+  font-family: monospace;
+}
+
+#ps {
+  display: flex;
+  justify-content: center;
+  margin-top: 5vw;
+  font-size: 2vw;
+  font-family: monospace;
+}

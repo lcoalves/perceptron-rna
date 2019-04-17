@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <link rel="stylesheet" type="text/css" href="./style.css">
+
+    <title>Single Perceptron</title>
+  </head>
+  <body>
+    <div id="app">
+      <button onclick="exercise1()">Iniciar Ex 1</button>
+      <button onclick="exercise2()">Iniciar Ex 2</button>
+      <button onclick="exercise3()">Iniciar Ex 3</button>
+      <button onclick="exercise4()">Iniciar Ex 4</button>
+      <button onclick="exercise5()">Iniciar Ex 5</button>
+      <button id="last" onclick="window.location.reload()">Limpar</button>
+    </div>
+    <div id="results"></div>
+    <div id="ps">*Acesse o console do navegador para verificar os detalhes calculados</div>
+
+    <script src="./main.js"></script>
+    <script>
+      let results = document.getElementById("results");
+
+      function exercise1() {
+        let perceptron = new Perceptron(3);
+
+        let inputs = [[0, 0], [0, 1], [1, 0], [1, 1]];
+        let outputs = [0, 0, 0, 1];
+
+        perceptron.train(inputs, outputs);
+
+        results.innerHTML = `<span>Resultado: </span>`;
+
+        results.innerHTML += `<span>[${perceptron.calc([1, 0])}, </span>`;
+        results.innerHTML += `<span>${perceptron.calc([0, 1])}, </span>`;
+        results.innerHTML += `<span>${perceptron.calc([0, 0])}, </span>`;
+        results.innerHTML += `<span>${perceptron.calc([1, 1])}]</span>`;
+
+        console.log(perceptron.calc([1, 0]));
+        console.log(perceptron.calc([0, 1]));
+        console.log(perceptron.calc([0, 0]));
+        console.log(perceptron.calc([1, 1]));
+      }
+
+      function exercise2() {
+        let perceptron = new Perceptron(26);
+
+        outputs = [0, 0, 0, 0, 0, 1, 1, 1, 1, 1]
+
+        inputs = [
+        [
+            1, 1, 1, 1, 1,
+            1, 0, 1, 0, 1,
+            0, 0, 1, 0, 0,
+            0, 0, 1, 0, 0,
+            0, 0, 1, 0, 0,
+        ],
+        [
+            1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1,
+            0, 0, 1, 0, 0,
+            0, 0, 1, 0, 0,
+            0, 0, 1, 0, 0,
+        ],
+        [
+            0, 0, 0, 0, 0,
+            1, 1, 1, 1, 1,
+            0, 0, 1, 0, 0,
+            0, 0, 1, 0, 0,
+            0, 0, 1, 0, 0,
+        ],
+        [
+            0, 0, 1, 0, 0,
+            1, 1, 1, 1, 1,
+            0, 0, 1, 0, 0,
+            0, 0, 1, 0, 0,
+            0, 0, 1, 0, 0,
+        ],
+        [
+            0, 1, 1, 1, 0,
+            0, 0, 1, 0, 0,
+            0, 0, 1, 0, 0,
+            0, 0, 1, 0, 0,
+            0, 0, 1, 0, 0,
+        ],
+        [
+            1, 1, 1, 1, 1,
+            1, 0, 0, 0, 1,
+            1, 0, 0, 0, 1,
+            1, 1, 1, 1, 1,
+            1, 0, 0, 0, 1,
+        ],
+        [
+            1, 1, 1, 1, 1,
+            1, 1, 0, 1, 1,
+            1, 1, 0, 1, 1,
+            1, 1, 1, 1, 1,
+            1, 1, 0, 1, 1,
+        ],
+        [
+            0, 1, 1, 1, 0,
+            0, 1, 0, 1, 0,
+            0, 1, 0, 1, 0,
+            0, 1, 1, 1, 0,
+            0, 1, 0, 1, 0,
+        ],
+        [
+            1, 1, 1, 1, 1,
+            1, 0, 0, 0, 1,
+            1, 0, 1, 0, 1,
+            1, 1, 0, 1, 1,
+            1, 0, 0, 0, 1,
+        ],
+        [
+            1, 1, 1, 1, 1,
+            1, 0, 0, 0, 1,
+            1, 1, 1, 1, 1,
+            1, 0, 0, 0, 1,
+            1, 0, 0, 0, 1,
+        ]
+        ]
+
+        perceptron.train(inputs, outputs);
+
+        results.innerHTML = `<span>Resultado: </span>`;
+
+        results.innerHTML += `<span>[${perceptron.calc([
+          1, 1, 1, 1, 1,
+          1, 0, 1, 0, 1,
+          1, 0, 1, 0, 1,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+        ])}, </span>`;
+        results.innerHTML += `<span>${perceptron.calc([
+          1, 1, 1, 1, 1,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+        ])}, </span>`;
+        results.innerHTML += `<span>${perceptron.calc([
+          1, 1, 1, 1, 1,
+          1, 1, 0, 1, 1,
+          1, 1, 1, 1, 1,
+          1, 1, 1, 1, 1,
+          1, 1, 0, 1, 1,
+        ])}, </span>`;
+        results.innerHTML += `<span>${perceptron.calc([
+          1, 1, 1, 1, 1,
+          1, 0, 0, 0, 1,
+          1, 0, 0, 0, 1,
+          1, 1, 1, 1, 1,
+          1, 0, 0, 0, 1,
+        ])}]</span>`;
+
+        console.log(perceptron.calc([
+          1, 1, 1, 1, 1,
+          1, 0, 1, 0, 1,
+          1, 0, 1, 0, 1,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+        ]))
+        console.log(perceptron.calc([
+          1, 1, 1, 1, 1,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+        ]))
+        console.log(perceptron.calc([
+          1, 1, 1, 1, 1,
+          1, 1, 0, 1, 1,
+          1, 1, 1, 1, 1,
+          1, 1, 1, 1, 1,
+          1, 1, 0, 1, 1,
+        ]))
+        console.log(perceptron.calc([
+          1, 1, 1, 1, 1,
+          1, 0, 0, 0, 1,
+          1, 0, 0, 0, 1,
+          1, 1, 1, 1, 1,
+          1, 0, 0, 0, 1,
+        ]))
+      }
+
+      function exercise3() {
+        //inspiração dos vetores de treinamento no grupo do Joao Monteiro
+        let outputs1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        let outputs2 = [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1,
+                        1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1]
+        let outputs3 = [0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0,
+                        1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0]
+        let outputs4 = [0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1,
+                        0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]
+        let outputs5 = [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
+                        0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+
+        let inputs = [
+          [
+              1, 1, 1, 1, 1,
+              1, 0, 0, 0, 1,
+              1, 1, 1, 1, 1,
+              1, 0, 0, 0, 1,
+              1, 0, 0, 0, 1,
+          ],
+          [
+              1, 1, 1, 1, 0,
+              1, 0, 0, 0, 1,
+              1, 1, 1, 1, 0,
+              1, 0, 0, 0, 1,
+              1, 1, 1, 1, 0,
+          ],
+          [
+              1, 1, 1, 1, 1,
+              1, 0, 0, 0, 0,
+              1, 0, 0, 0, 0,
+              1, 0, 0, 0, 0,
+              1, 1, 1, 1, 1,
+          ],
+          [
+              1, 1, 1, 1, 0,
+              1, 0, 0, 0, 1,
+              1, 0, 0, 0, 1,
+              1, 0, 0, 0, 1,
+              1, 1, 1, 1, 0,
+          ],
+          [
+              1, 1, 1, 1, 1,
+              1, 0, 0, 0, 0,
+              1, 1, 1, 1, 1,
+              1, 0, 0, 0, 0,
+              1, 1, 1, 1, 1,
+          ],
+          [
+              1, 1, 1, 1, 1,
+              1, 0, 0, 0, 0,
+              1, 1, 1, 1, 1,
+              1, 0, 0, 0, 0,
+              1, 0, 0, 0, 0,
+          ],
+          [
+              1, 1, 1, 1, 1,
+              1, 0, 0, 0, 0,
+              1, 0, 1, 1, 1,
+              1, 0, 0, 0, 1,
+              1, 1, 1, 1, 1,
+          ],
+          [
+              1, 0, 0, 0, 1,
+              1, 0, 0, 0, 1,
+              1, 1, 1, 1, 1,
+              1, 0, 0, 0, 1,
+              1, 0, 0, 0, 1,
+          ],
+          [
+              0, 0, 1, 0, 0,
+              0, 0, 1, 0, 0,
+              0, 0, 1, 0, 0,
+              0, 0, 1, 0, 0,
+              0, 0, 1, 0, 0,
+          ],
+          [
+              1, 1, 1, 1, 1,
+              0, 0, 1, 0, 0,
+              1, 0, 1, 0, 0,
+              1, 0, 1, 0, 0,
+              1, 1, 1, 0, 0,
+          ],
+          [
+              1, 0, 0, 0, 1,
+              1, 0, 0, 1, 0,
+              1, 1, 1, 0, 0,
+              1, 0, 0, 1, 0,
+              1, 0, 0, 0, 1,
+          ],
+          [
+              1, 0, 0, 0, 0,
+              1, 0, 0, 0, 0,
+              1, 0, 0, 0, 0,
+              1, 0, 0, 0, 0,
+              1, 1, 1, 1, 1,
+          ],
+          [
+              1, 0, 0, 0, 1,
+              1, 1, 0, 1, 1,
+              1, 0, 1, 0, 1,
+              1, 0, 0, 0, 1,
+              1, 0, 0, 0, 1,
+          ],
+          [
+              1, 0, 0, 0, 1,
+              1, 1, 0, 0, 1,
+              1, 0, 1, 0, 1,
+              1, 0, 0, 1, 1,
+              1, 0, 0, 0, 1,
+          ],
+          [
+              1, 1, 1, 1, 1,
+              1, 0, 0, 0, 1,
+              1, 0, 0, 0, 1,
+              1, 0, 0, 0, 1,
+              1, 1, 1, 1, 1,
+          ],
+          [
+              1, 1, 1, 1, 1,
+              1, 0, 0, 0, 1,
+              1, 1, 1, 1, 1,
+              1, 0, 0, 0, 0,
+              1, 0, 0, 0, 0,
+          ],
+          [
+              0, 1, 1, 1, 0,
+              1, 0, 0, 0, 1,
+              1, 0, 1, 0, 1,
+              1, 0, 0, 1, 1,
+              0, 1, 1, 1, 1,
+          ],
+          [
+              1, 1, 1, 1, 0,
+              1, 0, 0, 0, 1,
+              1, 1, 1, 1, 0,
+              1, 0, 0, 1, 0,
+              1, 0, 0, 0, 1,
+          ],
+          [
+              1, 1, 1, 1, 1,
+              1, 0, 0, 0, 0,
+              1, 1, 1, 1, 1,
+              0, 0, 0, 0, 1,
+              1, 1, 1, 1, 1,
+          ],
+          [
+              1, 1, 1, 1, 1,
+              0, 0, 1, 0, 0,
+              0, 0, 1, 0, 0,
+              0, 0, 1, 0, 0,
+              0, 0, 1, 0, 0,
+          ],
+          [
+              1, 0, 0, 0, 1,
+              1, 0, 0, 0, 1,
+              1, 0, 0, 0, 1,
+              1, 0, 0, 0, 1,
+              1, 1, 1, 1, 1,
+          ],
+          [
+              1, 0, 0, 0, 1,
+              0, 0, 0, 0, 0,
+              0, 1, 0, 1, 0,
+              0, 0, 0, 0, 0,
+              0, 0, 1, 0, 0,
+          ],
+          [
+              1, 0, 0, 0, 1,
+              1, 0, 0, 0, 1,
+              1, 0, 1, 0, 1,
+              1, 1, 0, 1, 1,
+              1, 0, 0, 0, 1,
+          ],
+          [
+              1, 0, 0, 0, 1,
+              0, 1, 0, 1, 0,
+              0, 0, 1, 0, 0,
+              0, 1, 0, 1, 0,
+              1, 0, 0, 0, 1,
+          ],
+          [
+              1, 0, 0, 0, 1,
+              0, 1, 0, 1, 0,
+              0, 0, 1, 0, 0,
+              0, 0, 1, 0, 0,
+              0, 0, 1, 0, 0,
+          ],
+          [
+              1, 1, 1, 1, 1,
+              0, 0, 0, 1, 0,
+              0, 0, 1, 0, 0,
+              0, 1, 0, 0, 0,
+              1, 1, 1, 1, 1,
+          ]
+        ]
+
+        let perceptron1 = new Perceptron(26)
+        let perceptron2 = new Perceptron(26)
+        let perceptron3 = new Perceptron(26)
+        let perceptron4 = new Perceptron(26)
+        let perceptron5 = new Perceptron(26)
+
+        perceptron1.train(inputs, outputs1);
+        perceptron2.train(inputs, outputs2);
+        perceptron3.train(inputs, outputs3);
+        perceptron4.train(inputs, outputs4);
+        perceptron5.train(inputs, outputs5);
+
+        results.innerHTML = `<span>Resultado: </span>`;
+
+        results.innerHTML += `<span>[${perceptron1.calc([
+          1, 1, 1, 1, 1,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+        ])}, </span>`;
+        results.innerHTML += `<span>${perceptron2.calc([
+          1, 1, 1, 1, 1,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+        ])}, </span>`;
+        results.innerHTML += `<span>${perceptron3.calc([
+          1, 1, 1, 1, 1,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+        ])}, </span>`;
+        results.innerHTML += `<span>${perceptron4.calc([
+          1, 1, 1, 1, 1,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+        ])}, </span>`;
+        results.innerHTML += `<span>${perceptron5.calc([
+          1, 1, 1, 1, 1,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+        ])}]</span>`;
+
+        console.log(perceptron1.calc([
+          1, 1, 1, 1, 1,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+        ]))
+        console.log(perceptron2.calc([
+          1, 1, 1, 1, 1,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+        ]))
+        console.log(perceptron3.calc([
+          1, 1, 1, 1, 1,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+        ]))
+        console.log(perceptron4.calc([
+          1, 1, 1, 1, 1,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+        ]))
+        console.log(perceptron5.calc([
+          1, 1, 1, 1, 1,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+          0, 0, 1, 0, 0,
+        ]))
+      }
+
+      function exercise4() {
+        let perceptronXor = new Perceptron(3);
+
+        let inputs = [[0, 0], [0, 1], [1, 0], [1, 1]];
+        let outputsXor = [0, 1, 1, 0];
+
+        perceptronXor.train(inputs, outputsXor);
+
+        results.innerHTML = `<span>Resultado: </span>`;
+
+        results.innerHTML += `<span>[${perceptronXor.calc([1, 0])}, </span>`;
+        results.innerHTML += `<span>${perceptronXor.calc([0, 1])}, </span>`;
+        results.innerHTML += `<span>${perceptronXor.calc([0, 0])}, </span>`;
+        results.innerHTML += `<span>${perceptronXor.calc([1, 1])}]</span>`;
+
+        console.log(perceptronXor.calc([1, 0]));
+        console.log(perceptronXor.calc([0, 1]));
+        console.log(perceptronXor.calc([0, 0]));
+        console.log(perceptronXor.calc([1, 1]));
+      }
+
+      function exercise5() {
+        //inspiração dos vetores de treinamento no grupo do Joao Monteiro
+        let perceptronNand = new Perceptron(3);
+        let perceptronOr = new Perceptron(3);
+        let perceptronAnd = new Perceptron(3);
+
+        let inputs = [[0, 0], [0, 1], [1, 0], [1, 1]];
+        let outputsNand = [1, 1, 1, 0];
+        let outputsOr = [0, 1, 1, 1];
+        let outputsAnd = [0, 0, 0, 1];
+
+        perceptronNand.train(inputs, outputsNand);
+        perceptronOr.train(inputs, outputsOr);
+        perceptronAnd.train(inputs, outputsAnd);
+
+        let andInputs = []
+
+        andInputs.push(perceptronNand.calc([0, 0]))
+        andInputs.push(perceptronOr.calc([0, 0]))
+
+        results.innerHTML = `<span>Resultado: </span>`;
+
+        results.innerHTML += `<span>[${perceptronAnd.calc(andInputs)}, </span>`;
+
+        console.log(perceptronAnd.calc(andInputs))
+
+        andInputs = []
+
+        andInputs.push(perceptronNand.calc([0, 1]))
+        andInputs.push(perceptronOr.calc([0, 1]))
+
+        results.innerHTML += `<span>${perceptronAnd.calc(andInputs)}, </span>`;
+
+        console.log(perceptronAnd.calc(andInputs))
+
+        andInputs = []
+
+        andInputs.push(perceptronNand.calc([1, 0]))
+        andInputs.push(perceptronOr.calc([1, 0]))
+
+        results.innerHTML += `<span>${perceptronAnd.calc(andInputs)}, </span>`;
+
+        console.log(perceptronAnd.calc(andInputs))
+
+        andInputs = []
+
+        andInputs.push(perceptronNand.calc([1, 1]))
+        andInputs.push(perceptronOr.calc([1, 1]))
+
+        results.innerHTML += `<span>${perceptronAnd.calc(andInputs)}]</span>`;
+
+        console.log(perceptronAnd.calc(andInputs))
+      }
+    </script>
+  </body>
+</html>
