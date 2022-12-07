@@ -1,3 +1,6 @@
+# Introdução
+
+O que são perceptrons? [Veja aqui](https://www.dca.ufrn.br/~lmarcos/courses/ia/notes/perceptrons.pdf)
 
 # Single and MLP - Redes Neurais
 
